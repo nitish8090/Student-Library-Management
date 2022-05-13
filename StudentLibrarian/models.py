@@ -19,7 +19,7 @@ class Student(ObjectLog):
     l_name = models.CharField(max_length=50)
     full_name = models.CharField(max_length=100)
 
-    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, to_field='username')
 
     standard = models.CharField(max_length=10, null=True, blank=True)
     section = models.CharField(max_length=10, null=True, blank=True)
@@ -37,7 +37,7 @@ class Librarian(ObjectLog):
     l_name = models.CharField(max_length=50)
     full_name = models.CharField(max_length=100)
 
-    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, to_field='username')
 
     def save(self, *args, **kwargs):
         self.full_name = f"{self.f_name} {self.l_name}"
