@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 
-from .models import User
-from .serializers import UserSafeSerializer
+from .models import User, Role
+from .serializers import UserSafeSerializer, RoleSerializer
 
 
 class UserViewSet(viewsets.ViewSet):
@@ -54,3 +54,8 @@ class UserViewSet(viewsets.ViewSet):
                 return Response({
                     'message': 'Login Failed, invalid credentials'
                 })
+
+
+class RoleViewSet(viewsets.ModelViewSet):
+    queryset = Role.objects.all()
+    serializer_class = RoleSerializer

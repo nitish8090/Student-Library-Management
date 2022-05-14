@@ -4,7 +4,7 @@ from django.conf import settings
 
 class ObjectLog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    create_by = models.CharField(max_length=50)
+    created_by = models.CharField(max_length=50)
     modified_at = models.DateTimeField(auto_now=True)
     modified_by = models.CharField(max_length=50, default='UnModified')
 
@@ -35,7 +35,7 @@ class Librarian(ObjectLog):
 
     f_name = models.CharField(max_length=50)
     l_name = models.CharField(max_length=50)
-    full_name = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=100, blank=True)
 
     username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, to_field='username')
 

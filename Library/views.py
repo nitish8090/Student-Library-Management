@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from .models import Book, BookIssue
 from .serializers import BookSerializer, BookIssueSerializer
-from StudentLibrarian.models import Student
+from StudentLibrarian.models import Student, Librarian
 
 
 class BookViewSet(viewsets.ModelViewSet):
@@ -30,8 +30,14 @@ class BookViewSet(viewsets.ModelViewSet):
         except KeyError as e:
             return Response(f"Please send {e}", status=400)
 
+        try:
+            librarian = Librarian.objects.get(username=request.user.username)
+        except Librarian.DoesNotExist:
+            return Response("Librarian not found", status=404)
+
         if book.quantity - book.quantity_issued > 0:
-            book_issue = BookIssue(book=book, student=student)
+            book_issue = BookIssue(book=book, student=student, issued_by=librarian)
+
             book.quantity_issued += 1
             book_issue.save()
             book.save()
