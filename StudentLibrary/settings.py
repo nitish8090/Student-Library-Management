@@ -132,7 +132,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "UserManager.User"
 
-CORS_ALLOWED_ORIGINS = [
-    "https://www.nitishpatel.in/",
-    "http://localhost:4200/"
-]
+CORS_ALLOW_ALL_ORIGINS = True
