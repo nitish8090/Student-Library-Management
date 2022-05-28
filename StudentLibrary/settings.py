@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'StudentLibrary.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'StudentLibraryManagement',
+        'NAME': 'studentlibrarymanagement',
         'USER': os.environ.get('PG_USER'),
         'PASSWORD': os.environ.get('PG_PASSWORD'),
         'HOST': 'localhost',
