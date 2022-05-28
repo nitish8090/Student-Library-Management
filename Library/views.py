@@ -15,6 +15,16 @@ class BookViewSet(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
+    def create(self, request, *args, **kwargs):
+        request.data['created_by'] = request.user.username
+
+        serializer = BookSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
+
     @action(detail=True, url_path='IssueBook', methods=['POST'])
     def issue_book(self, request, pk):
 
